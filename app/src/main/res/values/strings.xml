@@ -28,4 +28,6 @@
     <string name="btn_register">注册</string>
     <string name="title_message">消息</string>
     <string name="tv_addbtn">添加</string>
+    <string name="title_contact">联系人</string>
+    <string name="login_icon">登录头像</string>
 </resources>

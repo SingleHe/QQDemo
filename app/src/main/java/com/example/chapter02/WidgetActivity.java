@@ -9,10 +9,15 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -147,7 +152,13 @@ public class WidgetActivity extends AppCompatActivity{
                 myWidget.setBackgroundColor(Color.parseColor("#000000"));
                 blue_sw.setTextColor(Color.parseColor("#FFF055"));
             }
-            //Toast.makeText(WidgetActivity.this,msg,Toast.LENGTH_SHORT).show();
+            Toast myToast = Toast.makeText(WidgetActivity.this,msg,Toast.LENGTH_SHORT);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            WidgetActivity.this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int height = displayMetrics.heightPixels;
+            Log.d("WidgetActivity","获取屏幕高度为:"+height);
+            myToast.setGravity(Gravity.TOP,0,height/2);
+            myToast.show();
         });
         /*ProgressBar progressBar = findViewById(R.id.progress_bar);
         blue_sw.setOnCheckedChangeListener((view,isChecked)->{

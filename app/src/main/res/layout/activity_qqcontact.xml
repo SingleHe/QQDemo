@@ -5,5 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QQContactActivity">
+    <LinearLayout
+        android:id="@+id/title_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3EA3F3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <ImageView
+            android:id="@+id/imgLoginIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/guanyu"
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"
+            android:contentDescription="@string/login_icon"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/title_contact"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/tv_AddBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/tv_addbtn"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_marginEnd="20dp"/>
+    </LinearLayout>
+    <ExpandableListView
+        android:id="@+id/exlv_contact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="70dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
