@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_qqicon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/yase"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_qqname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="亚瑟"
+            android:textSize="20sp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tv_lasttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="怒拿一血"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="bottom"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="right|center_vertical">
+
+        <TextView
+            android:id="@+id/tv_lastmsgtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下午 14:20"
+            android:textSize="16sp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tv_notreadmsgcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="bottom|right"/>
+    </LinearLayout>
+
+
+</LinearLayout>

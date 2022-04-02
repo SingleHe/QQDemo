@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyCheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:drawableLeft">@drawable/chk_button</item>
+    </style>
+    <style name="BtnStyle">
+        <item name="android:background">@drawable/btn_bg_selector</item>
+        <item name="android:textColor">@color/btn_color_selector</item>
+    </style>
+    <style name="MyTv_Btn">
+        <item name="android:textColor">@color/textview_button</item>
+    </style>
+</resources>

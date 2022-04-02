@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WidgetActivity"
+    android:orientation="vertical"
+    android:id="@+id/my_widget">
+    <TextView
+        android:id="@+id/honour_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="欢迎来到王者峡谷！"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:background="#FF00EE"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
+    <EditText
+        android:id="@+id/inputHero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:hint="请输入你选择的英雄"/>
+    <Button
+        android:id="@+id/confirm_hero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确认选择"
+        android:textSize="20sp"
+        android:maxLines="2"
+        android:layout_gravity="center_horizontal"/>
+    <ImageView
+        android:id="@+id/image_myhero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/yase"
+        android:maxHeight="300dp"
+        android:maxWidth="400dp"
+        android:adjustViewBounds="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/cb_yase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="亚瑟"
+            android:textSize="24sp"
+            android:layout_marginLeft="5dp"/>
+        <CheckBox
+            android:id="@+id/cb_bingnv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="冰女"
+            android:textSize="24sp"
+            android:layout_marginLeft="5dp"/>
+        <CheckBox
+            android:id="@+id/cb_houyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="后羿"
+            android:textSize="24sp"
+            android:layout_marginLeft="5dp"/>
+        <CheckBox
+            android:id="@+id/cb_luban"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="鲁班"
+            android:textSize="24sp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/hero_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确认选择"
+        android:textSize="20sp"
+        android:maxLines="2"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/pb_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"/>
+    <ProgressBar
+        android:id="@+id/progress_bar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:padding="5dp"
+        android:max="100"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <RadioGroup
+            android:id="@+id/gender_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="男"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="女"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radio_secret"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="保密"
+                android:textSize="20sp" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_bluebooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minHeight="48dp"
+        android:text="开/关"
+        android:textColor="#FFFF00"
+        android:textSize="20dp"
+        android:thumb="@drawable/switch_ios_thumb"
+        android:track="@drawable/switch_ios_track_selector" />
+    <!--<ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />-->
+    <ImageView
+        android:id="@+id/img_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:maxHeight="200dp"
+        android:src="@drawable/off"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/dialog_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出对话框"
+        android:textSize="20sp"
+        android:maxLines="2"
+        android:layout_gravity="center_horizontal"/>
+
+
+</LinearLayout>

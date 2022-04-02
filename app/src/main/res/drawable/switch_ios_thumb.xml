@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- shape="oval"表示椭圆的意思-->
+    <solid android:color="#FFF"/>
+    <!--stroke 这是描边属性，可以定义描边的宽度，颜色，虚实线等-->
+    <stroke
+        android:width="3dp"
+        android:color="#000"/>
+    <size
+        android:width="25dp"
+        android:height="25dp"/>
+</shape>
