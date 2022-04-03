@@ -32,7 +32,7 @@ public class QQLoginActivity extends AppCompatActivity {
             String number = QQCount.getText().toString();
             String password = QQPassword.getText().toString();
             if(number != null && password !=null && "821978332".equals(number) && "123456".equals(password)){
-                Intent intent = new Intent(this,QQMessageActivity.class);
+                Intent intent = new Intent(this,QQContactActivity.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(QQLoginActivity.this,"QQ账号或密码有误！",Toast.LENGTH_SHORT).show();

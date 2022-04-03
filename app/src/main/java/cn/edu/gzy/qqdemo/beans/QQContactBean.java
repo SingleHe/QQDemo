@@ -1,12 +1,12 @@
 package cn.edu.gzy.qqdemo.beans;
 
-public class QQConatactBean {
+public class QQContactBean {
     private String name;
     private int img;
     private String onLineMode;
     private String newAction;
 
-    public QQConatactBean(String name, int img, String onLineMode, String newAction) {
+    public QQContactBean(String name, int img, String onLineMode, String newAction) {
         this.name = name;
         this.img = img;
         this.onLineMode = onLineMode;
