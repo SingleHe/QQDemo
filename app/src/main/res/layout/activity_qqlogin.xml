@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
     android:minHeight="48dp"
-    tools:context=".QQLoginActivity">
+    tools:context="cn.edu.gzy.qqdemo.QQLoginActivity">
 
     <ImageView
         android:id="@+id/imageQQ"

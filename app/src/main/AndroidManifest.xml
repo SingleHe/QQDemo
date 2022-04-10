@@ -10,14 +10,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Chapter02">
+        <activity android:name="cn.edu.gzy.qqdemo.QQMainActivity"
+            android:exported="true">
+
+        </activity>
         <activity
-            android:name=".QQContactActivity"
+            android:name="cn.edu.gzy.qqdemo.QQContactActivity"
             android:exported="false" />
         <activity
-            android:name=".QQMessageActivity"
+            android:name="cn.edu.gzy.qqdemo.QQMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="cn.edu.gzy.qqdemo.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".WidgetActivity"
@@ -26,10 +30,10 @@
             android:name=".TableActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgetPwdActivity"
+            android:name="cn.edu.gzy.qqdemo.ForgetPwdActivity"
             android:exported="false" />
         <activity
-            android:name=".QQLoginActivity"
+            android:name="cn.edu.gzy.qqdemo.QQLoginActivity"
             android:exported="false" />
         <activity
             android:name=".LinearActivity"
@@ -46,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DialogActivity"
+            android:name="cn.edu.gzy.qqdemo.DialogActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity

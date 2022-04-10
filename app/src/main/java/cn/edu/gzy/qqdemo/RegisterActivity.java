@@ -1,4 +1,4 @@
-package com.example.chapter02;
+package cn.edu.gzy.qqdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.chapter02.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

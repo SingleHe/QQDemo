@@ -5,18 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
+
+import cn.edu.gzy.qqdemo.DialogActivity;
+import cn.edu.gzy.qqdemo.QQLoginActivity;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String tag = "SecondActivity";
@@ -43,14 +42,14 @@ public class SecondActivity extends AppCompatActivity {
             /*Intent intent  = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.baidu.com"));
             startActivity(intent);*/
-            Intent intent = new Intent(this,QQLoginActivity.class);
+            Intent intent = new Intent(this, QQLoginActivity.class);
             startActivity(intent);
 
             //2. 打开拨号界面
 
         });
         register.setOnClickListener(v->{
-            Intent intent = new Intent(this,DialogActivity.class);
+            Intent intent = new Intent(this, DialogActivity.class);
             Intent intent1 = new Intent("com.example.chapter02.ACTION_START");
             intent1.addCategory("com.example.chapter02.MY_CATEGORY");
             startActivity(intent1);

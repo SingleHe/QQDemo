@@ -1,4 +1,4 @@
-package com.example.chapter02;
+package cn.edu.gzy.qqdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.chapter02.R;
+
+import cn.edu.gzy.qqdemo.QQMainActivity;
 
 public class QQLoginActivity extends AppCompatActivity {
 
@@ -32,7 +36,7 @@ public class QQLoginActivity extends AppCompatActivity {
             String number = QQCount.getText().toString();
             String password = QQPassword.getText().toString();
             if(number != null && password !=null && "821978332".equals(number) && "123456".equals(password)){
-                Intent intent = new Intent(this,QQContactActivity.class);
+                Intent intent = new Intent(this, QQMainActivity.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(QQLoginActivity.this,"QQ账号或密码有误！",Toast.LENGTH_SHORT).show();

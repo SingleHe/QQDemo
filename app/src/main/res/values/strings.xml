@@ -30,4 +30,6 @@
     <string name="tv_addbtn">添加</string>
     <string name="title_contact">联系人</string>
     <string name="login_icon">登录头像</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

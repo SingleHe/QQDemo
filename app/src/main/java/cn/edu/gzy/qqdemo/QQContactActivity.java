@@ -1,9 +1,11 @@
-package com.example.chapter02;
+package cn.edu.gzy.qqdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ExpandableListView;
+
+import com.example.chapter02.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

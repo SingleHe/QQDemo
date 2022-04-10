@@ -1,10 +1,15 @@
-package com.example.chapter02;
-
-import androidx.appcompat.app.AppCompatActivity;
+package cn.edu.gzy.qqdemo.fragments;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.chapter02.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,16 +20,20 @@ import java.util.Random;
 import cn.edu.gzy.qqdemo.adapters.QQMessageAdapter;
 import cn.edu.gzy.qqdemo.beans.QQMessageBean;
 
-public class QQMessageActivity extends AppCompatActivity {
+
+public class QQMessageFragment extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qqmessage);
-        ListView lvMsg = findViewById(R.id.listview_qqmsg);
-        QQMessageAdapter adapter = new  QQMessageAdapter(getMessageList(),this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.activity_qqmessage, container, false);
+        ListView lvMsg = view.findViewById(R.id.listview_qqmsg);
+        QQMessageAdapter adapter = new  QQMessageAdapter(getMessageList(),view.getContext());
         lvMsg.setAdapter(adapter);
+        return view;
     }
+
     private List<QQMessageBean> getMessageList(){
         ArrayList<QQMessageBean> data = new ArrayList<>();
         String[] names = {"刘备","曹操","孙权","张飞","关羽","赵云","诸葛亮","黄忠","魏延"};
