@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <cn.edu.gzy.qqdemo.widgets.MyCircleImageView
+        xmlns:myimage="http://schemas.android.com/apk/res/com.example.chapter02"
+        myimage:border_width="3dp"
+        myimage:border_color="#f2f2f2"
         android:id="@+id/imgIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"

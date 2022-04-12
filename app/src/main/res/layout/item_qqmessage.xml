@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
+    <cn.edu.gzy.qqdemo.widgets.MyCircleImageView
+        xmlns:myimage="http://schemas.android.com/apk/res/com.example.chapter02"
+        myimage:border_width="3dp"
+        myimage:border_color="#f2f2f2"
         android:id="@+id/img_qqicon"
         android:layout_width="80dp"
         android:layout_height="80dp"

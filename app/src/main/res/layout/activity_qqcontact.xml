@@ -12,8 +12,11 @@
         android:background="#3EA3F3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <ImageView
+        <cn.edu.gzy.qqdemo.widgets.MyCircleImageView
+            xmlns:myimage="http://schemas.android.com/apk/res/com.example.chapter02"
             android:id="@+id/imgLoginIcon"
+            myimage:border_width="3dp"
+            myimage:border_color="#f2f2f2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/guanyu"
