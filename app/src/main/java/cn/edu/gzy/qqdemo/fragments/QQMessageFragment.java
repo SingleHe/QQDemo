@@ -2,12 +2,18 @@ package cn.edu.gzy.qqdemo.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.chapter02.R;
 
@@ -22,6 +28,7 @@ import cn.edu.gzy.qqdemo.beans.QQMessageBean;
 
 
 public class QQMessageFragment extends Fragment {
+    private ArrayList<QQMessageBean> data ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,11 +38,18 @@ public class QQMessageFragment extends Fragment {
         ListView lvMsg = view.findViewById(R.id.listview_qqmsg);
         QQMessageAdapter adapter = new  QQMessageAdapter(getMessageList(),view.getContext());
         lvMsg.setAdapter(adapter);
+        registerForContextMenu(lvMsg);
         return view;
     }
 
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.menu_message,menu);
+    }
+
     private List<QQMessageBean> getMessageList(){
-        ArrayList<QQMessageBean> data = new ArrayList<>();
+        data = new ArrayList<>();
         String[] names = {"刘备","曹操","孙权","张飞","关羽","赵云","诸葛亮","黄忠","魏延"};
         int[] imgs = {R.drawable.liubei,R.drawable.caocao,R.drawable.sunquan,R.drawable.zhangfei,
                 R.drawable.guanyu,R.drawable.zhaoyun,R.drawable.zhugeliang,R.drawable.huangzhong,
@@ -48,5 +62,40 @@ public class QQMessageFragment extends Fragment {
             data.add(msg);
         }
         return data;
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuItem_gotop:
+                goTop(item);
+                break;
+            case R.id.menuItem_deleteMsg:
+                deleteMsg(item);
+                break;
+            default:
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteMsg(MenuItem item) {
+        ContextMenu.ContextMenuInfo info = item.getMenuInfo();
+        AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) info;
+        //获取选中的位置
+        int position = contextMenuInfo.position;
+        //获取QQ名称
+        String qqName = data.get(position).getQqName();
+        Toast.makeText(getContext(),item.getTitle()+" "+qqName,Toast.LENGTH_SHORT).show();
+    }
+
+    private void goTop(MenuItem item) {
+        ContextMenu.ContextMenuInfo info = item.getMenuInfo();
+        AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) info;
+        //获取选中的位置
+        int position = contextMenuInfo.position;
+        //获取QQ名称
+        String qqName = data.get(position).getQqName();
+        Toast.makeText(getContext(),item.getTitle()+" "+qqName,Toast.LENGTH_SHORT).show();
     }
 }

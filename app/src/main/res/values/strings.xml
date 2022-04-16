@@ -30,6 +30,17 @@
     <string name="tv_addbtn">添加</string>
     <string name="title_contact">联系人</string>
     <string name="login_icon">登录头像</string>
+    <string name="menuItem_about">关于</string>
+    <string name="menuItem_exit">退出</string>
+    <string name="dialog_about_title">关于</string>
+    <string name="dialog_about_message">QQ Demo</string>
+    <string name="dialog_btn_yes">是</string>
+    <string name="dialog_btn_no">否</string>
+    <string name="dialog_btn_ok">确定</string>
+    <string name="dialog_exit_title">确认</string>
+    <string name="dialog_exit_message">是否要退出应用？</string>
+    <string name="menuItem_goTop">置顶</string>
+    <string name="menuItem_delete">删除</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

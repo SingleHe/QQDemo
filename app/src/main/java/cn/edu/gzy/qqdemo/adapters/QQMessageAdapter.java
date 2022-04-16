@@ -50,6 +50,7 @@ public class QQMessageAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_qqmessage,parent,false);
             holder = new ViewHolder();
             holder.qqIcon = convertView.findViewById(R.id.img_qqicon);
+            holder.qqName = convertView.findViewById(R.id.tv_qqname);
             holder.lastTitle = convertView.findViewById(R.id.tv_lasttitle);
             holder.lastMsgTime = convertView.findViewById(R.id.tv_lastmsgtime);
             holder.notReadMsgCount =convertView.findViewById(R.id.tv_notreadmsgcount);
@@ -59,6 +60,7 @@ public class QQMessageAdapter extends BaseAdapter {
         }
         QQMessageBean msg = data.get(position);
         holder.qqIcon.setImageResource(msg.getQqIcon());
+        holder.qqName.setText(msg.getQqName());
         holder.lastTitle.setText(msg.getLastTitle());
         holder.lastMsgTime.setText(msg.getLastMsgTime());
         holder.notReadMsgCount.setText(msg.getNotReadMsgCount()+"");

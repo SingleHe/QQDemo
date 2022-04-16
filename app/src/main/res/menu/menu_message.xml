@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuItem_gotop" android:title="@string/menuItem_goTop">
+
+    </item>
+    <item android:id="@+id/menuItem_deleteMsg" android:title="@string/menuItem_delete">
+
+    </item>
+</menu>
