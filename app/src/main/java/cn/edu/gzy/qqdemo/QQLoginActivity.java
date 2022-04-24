@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,16 +39,34 @@ public class QQLoginActivity extends AppCompatActivity {
         Button loginBtn = findViewById(R.id.btn_login);
         EditText QQCount = findViewById(R.id.etQQName);
         EditText QQPassword = findViewById(R.id.etQQPwd);
+        CheckBox chkRememberPwd = findViewById(R.id.chkRememberPwd);
         loginBtn.setOnClickListener(v->{
             String number = QQCount.getText().toString();
             String password = QQPassword.getText().toString();
             if(number != null && password !=null && "821978332".equals(number) && "123456".equals(password)){
-                Intent intent = new Intent(this, QQMainActivity.class);
+                if(chkRememberPwd.isChecked()){
+                    //1.获得SharedPreference对象
+                    SharedPreferences settings = getSharedPreferences("setting", MODE_PRIVATE);
+                    //2. 获取SharedPreferences.Editor对象
+                    SharedPreferences.Editor edit = settings.edit();
+                    //3. 添加数据
+                    edit.putString("qqCount", number);
+                    edit.putString("qqPassword", password);
+                    edit.putBoolean("isRemembered",true);
+                    //4. 提交
+                    edit.commit();
+                }
+                Intent intent  = new Intent(this, QQMainActivity.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(QQLoginActivity.this,"QQ账号或密码有误！",Toast.LENGTH_SHORT).show();
             }
         });
+        //自动填充数据
+        SharedPreferences settings = getSharedPreferences("setting", MODE_PRIVATE);
+        QQCount.setText(settings.getString("qqCount",""));
+        QQPassword.setText(settings.getString("qqPassword",""));
+        chkRememberPwd.setChecked(settings.getBoolean("isRemembered",false));
     }
 
     @Override
