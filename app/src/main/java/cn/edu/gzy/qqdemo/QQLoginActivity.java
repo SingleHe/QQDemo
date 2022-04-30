@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,9 @@ import android.widget.Toast;
 import com.example.chapter02.R;
 
 import cn.edu.gzy.qqdemo.QQMainActivity;
+import cn.edu.gzy.qqdemo.beans.QQContactBean;
+import cn.edu.gzy.qqdemo.dbutils.Db_Params;
+import cn.edu.gzy.qqdemo.dbutils.MyDBHelper;
 
 public class QQLoginActivity extends AppCompatActivity {
 
@@ -43,7 +48,22 @@ public class QQLoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(v->{
             String number = QQCount.getText().toString();
             String password = QQPassword.getText().toString();
-            if(number != null && password !=null && "821978332".equals(number) && "123456".equals(password)){
+            //1.获取数据库帮组类
+            MyDBHelper helper = new MyDBHelper(getApplicationContext(), Db_Params.DB_NAME,null,Db_Params.DB_VER);
+            //2.获取数据库
+            SQLiteDatabase db = helper.getReadableDatabase();
+            //3.定义数据库操作语句
+            String sql = "select * from QQ_Login where qq_num = ? and qq_pwd = ? ";
+            Cursor cursor = db.rawQuery(sql, new String[]{number,password});
+            if(cursor.moveToNext()){
+                QQMainActivity.loginedUser = new QQContactBean(
+                   cursor.getString(cursor.getColumnIndexOrThrow("qq_name")),
+                   cursor.getInt(cursor.getColumnIndexOrThrow("qq_img")),
+                   cursor.getString(cursor.getColumnIndexOrThrow("qq_online")),
+                   cursor.getString(cursor.getColumnIndexOrThrow("qq_action")),
+                   cursor.getString(cursor.getColumnIndexOrThrow("qq_num")),
+                   cursor.getString(cursor.getColumnIndexOrThrow("belong_country"))
+                );
                 if(chkRememberPwd.isChecked()){
                     //1.获得SharedPreference对象
                     SharedPreferences settings = getSharedPreferences("setting", MODE_PRIVATE);

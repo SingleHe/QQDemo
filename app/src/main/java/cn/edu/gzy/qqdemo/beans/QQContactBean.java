@@ -1,16 +1,27 @@
 package cn.edu.gzy.qqdemo.beans;
 
 public class QQContactBean {
-    private String name;
-    private int img;
-    private String onLineMode;
-    private String newAction;
+    private String name;//QQ 名
+    private int img;//QQ头像
+    private String onLineMode;//登录方式
+    private String newAction;//新状态
+    private String num;//QQ 号码
+    private String belong_country;//所属国家
 
     public QQContactBean(String name, int img, String onLineMode, String newAction) {
         this.name = name;
         this.img = img;
         this.onLineMode = onLineMode;
         this.newAction = newAction;
+    }
+
+    public QQContactBean(String name, int img, String onLineMode, String newAction, String num, String belong_country) {
+        this.name = name;
+        this.img = img;
+        this.onLineMode = onLineMode;
+        this.newAction = newAction;
+        this.num = num;
+        this.belong_country = belong_country;
     }
 
     public String getName() {
@@ -43,5 +54,21 @@ public class QQContactBean {
 
     public void setNewAction(String newAction) {
         this.newAction = newAction;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getBelong_country() {
+        return belong_country;
+    }
+
+    public void setBelong_country(String belong_country) {
+        this.belong_country = belong_country;
     }
 }

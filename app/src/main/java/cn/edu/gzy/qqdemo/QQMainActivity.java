@@ -16,11 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.gzy.qqdemo.adapters.QQFragmentPagerAdapter;
+import cn.edu.gzy.qqdemo.beans.QQContactBean;
 import cn.edu.gzy.qqdemo.fragments.QQContactFragment;
 import cn.edu.gzy.qqdemo.fragments.QQMessageFragment;
 
 public class QQMainActivity extends FragmentActivity {
     private ViewPager2 vp2;
+    public static QQContactBean loginedUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
