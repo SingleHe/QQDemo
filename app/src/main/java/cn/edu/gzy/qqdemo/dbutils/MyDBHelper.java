@@ -23,7 +23,16 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 "qq_online VARCHAR," +
                 "qq_action VARCHAR ," +
                 "belong_country VARCHAR);";
-        db.execSQL(sql);
+        //创建联系人信息表QQ_Contact
+        String sql1 = "CREATE TABLE QQ_Contact(contactId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "qq_num VARCHAR NOT NULL," +
+                "belong_qq VARCHAR NOT NULL)";
+        //创建View_Contact视图,QQ_Contact左连接QQ_Login表
+        String sql2 = "CREATE VIEW view_contact as SELECT u.contactId , u.belong_qq , v.* FROM " +
+                "QQ_Contact u LEFT JOIN QQ_Login v on u.qq_num = v.qq_num";
+        db.execSQL(sql);//执行创建登录信息表
+        db.execSQL(sql1);//执行创建联系人信息表
+        db.execSQL(sql2);//执行创建视图语句
         initData(db);
     }
 
@@ -74,10 +83,32 @@ public class MyDBHelper extends SQLiteOpenHelper {
                         countries[i]});
             }
         }
+        //初始化联系人数据
+        String sql1 = "insert into QQ_Contact(qq_num, belong_qq) values(?,?)";
+        //设置1002的联系人
+        for(int i = 0 ; i < nums.length; i++){
+            for(int j = 0 ; j < nums.length; j++){
+                //将除了1002自己以外的人都设置成它的联系人
+                if(!"1002".equals(nums[i][j])){
+                  db.execSQL(sql, new Object[]{nums[i][j],"1002"});
+                }
+                //设置1001的联系人  条件是：每一行偶数列的人才是联系人
+                if(!"1001".equals(nums[i][j]) && j % 2 == 0){
+                    db.execSQL(sql, new Object[]{nums[i][j], "1001"});
+                }
+                //设置2001的联系人， 条件是：每一行中第二列之后的才是联系人
+                if(!"2001".equals(nums[i][j]) && j > 0){
+                    db.execSQL(sql, new Object[]{nums[i][j], "2001"});
+                }
+            }
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //更新数据库  先把已有的数据表删除
+        db.execSQL("drop table if exists QQ_Login");
+        db.execSQL("drop table if exists QQ_Contact");
+        onCreate(db);
     }
 }
