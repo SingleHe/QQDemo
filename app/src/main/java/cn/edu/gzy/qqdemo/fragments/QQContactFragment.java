@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.chapter02.R;
 
@@ -28,11 +29,14 @@ import cn.edu.gzy.qqdemo.adapters.QQContactAdapter;
 import cn.edu.gzy.qqdemo.beans.QQContactBean;
 import cn.edu.gzy.qqdemo.dbutils.Db_Params;
 import cn.edu.gzy.qqdemo.dbutils.MyDBHelper;
+import cn.edu.gzy.qqdemo.dialogs.NewContactDialog;
+import cn.edu.gzy.qqdemo.dialogs.OnDialogCompleted;
 
-public class QQContactFragment extends Fragment {
+public class QQContactFragment extends Fragment implements OnDialogCompleted {
     private ExpandableListView epListView;
     private QQContactAdapter adapter;
     private ImageView loginedImg;//修改联系人界面对应的登录头像
+    private TextView addContactBtn;//添加联系人按钮
     private String countries[] = new String[]{"蜀","魏","吴"};
     private String names[][] = new String[][]{
             {"刘备","关羽","张飞","赵云","黄忠","魏延"},
@@ -56,6 +60,11 @@ public class QQContactFragment extends Fragment {
         loginedImg = view.findViewById(R.id.imgLoginIcon);
         //在登录Activity中，已经将登录账号的数据查询出来设置在了QQMainActivity的静态内部成员loginedUser对象中。
         loginedImg.setImageResource(QQMainActivity.loginedUser.getImg());
+        addContactBtn = view.findViewById(R.id.tv_AddBtn);
+        //点击添加联系人时，弹窗！
+        addContactBtn.setOnClickListener(v->{
+            showNewContactDialog();
+        });
         epListView = view.findViewById(R.id.exlv_contact);
         childData = new HashMap<String, List<QQContactBean>>();
         groupData = new ArrayList<String>();
@@ -112,7 +121,18 @@ public class QQContactFragment extends Fragment {
      * 弹出新建联系窗口
      */
     private void showNewContactDialog() {
-
+        NewContactDialog dialog = new NewContactDialog();
+        //getFragmentManager()过期了，改为以下两种，区别如下：
+        /**
+         * 1.use getChildFragmentManager() Return a private FragmentManager for
+         * placing and managing Fragments inside of this Fragment.
+         * 2.use getParentFragmentManager() Return the FragmentManager for interacting
+         * with fragments associated with this fragment's activity.
+         *
+         * totally： if you deal with fragments inside a fragment you will use the first one and
+         * if you deal with fragments inside an activity you will use the second one.
+         */
+        dialog.show(getChildFragmentManager(),"NewContact");
     }
 
     /**
@@ -191,6 +211,24 @@ public class QQContactFragment extends Fragment {
                 list.add(bean);
             }
             childData.put(countryName, list);
+        }
+    }
+
+    /**
+     * 实现自动刷新新增联系人列表
+     * @param dialogResult
+     * @param dialogId
+     */
+    @Override
+    public void dialogCompleted(String dialogResult, int dialogId) {
+        //1. 清空原有的groupData 和 childData
+        switch (dialogId){
+            case 0:
+                groupData.clear();
+                childData.clear();
+                getContacts();//重新获取联系人
+                adapter.notifyDataSetChanged();//通知适配器数据更新
+                break;
         }
     }
 }
