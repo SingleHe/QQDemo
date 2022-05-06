@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/dialog_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_title"
+        android:textSize="24sp"
+        android:background="#2196F3"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="#fff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/dialog_tv_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dlg_tvChooseContact"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"/>
+    <Spinner
+        android:id="@+id/dlg_spnContact"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tv_choose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/dlg_btnOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加好友"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/dlg_spnContact"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dlg_btnCancel"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <Button
+        android:id="@+id/dlg_btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dlg_spnContact"
+        app:layout_constraintStart_toEndOf="@id/dlg_btnOK"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

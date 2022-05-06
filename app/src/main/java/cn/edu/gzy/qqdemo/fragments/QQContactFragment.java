@@ -4,9 +4,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -56,10 +60,85 @@ public class QQContactFragment extends Fragment {
         childData = new HashMap<String, List<QQContactBean>>();
         groupData = new ArrayList<String>();
         //initialData();//程序设定的联系人数据
+        getContacts();//访问数据库获取联系人数据
         //这里不要用this.getContenxt()
         adapter = new QQContactAdapter(groupData,childData,view.getContext());
         epListView.setAdapter(adapter);
+        registerForContextMenu(epListView);//在可扩展列表商注册环境上下文菜单。
         return view;
+    }
+
+    /**
+     * 用户常按组数据项时，不显示上下文菜单
+     * 当用户长按子数据项时，显示菜单
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+        long packedPosition = info.packedPosition;
+        //判断是组数据项还是子数据项，0表示组数据项，1表示子数据项
+        int packedPositionType = ExpandableListView.getPackedPositionType(packedPosition);
+        if (packedPositionType == 1){
+            getActivity().getMenuInflater().inflate(R.menu.menu_contact,menu);
+        }
+    }
+
+    /**
+     * 上下文菜单项被选中触发事件
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            //如果是删除联系人
+            case R.id.menuitem_delContact:
+                deleteContact(item);//删除联系人
+                break;
+            case R.id.menuitem_newcontact:
+                showNewContactDialog();//弹出添加联系人对话框
+                break;
+            default:
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    /**
+     * 弹出新建联系窗口
+     */
+    private void showNewContactDialog() {
+
+    }
+
+    /**
+     * 删除联系人
+     * @param item
+     */
+    private void deleteContact(MenuItem item) {
+        //1. 获得要删除的选项
+        ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+        //2. 获得选中的外层组项
+        int groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+        //3. 获得指定组项下的子选项
+        int childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
+        //4. 从联系人Map集合中找到对应的数据
+        QQContactBean bean = childData.get(groupData.get(groupPos)).get(childPos);
+        //5. 获取数据库
+        MyDBHelper helper = new MyDBHelper(getContext(),Db_Params.DB_NAME,null,Db_Params.DB_VER);
+        SQLiteDatabase db = helper.getWritableDatabase();//获取数据库对象
+        String sql = "delete from QQ_Contact where qq_num = ? and belong_qq = ?";
+        //6. 执行删除操作
+        db.execSQL(sql,new Object[]{bean.getNum(),QQMainActivity.loginedUser.getNum()});
+        //7. 从缓存好的数据中childData将该项联系人删除
+        //childData.remove(childData.get(groupData.get(groupPos)).get(childPos));
+        childData.get(groupData.get(groupPos)).remove(childPos);//删除指定位置的数据就可以了
+        //8. 通知视图更新数据
+        adapter.notifyDataSetChanged();
     }
 
     /**
