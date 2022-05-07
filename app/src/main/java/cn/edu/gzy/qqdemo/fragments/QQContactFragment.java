@@ -133,6 +133,7 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
          * if you deal with fragments inside an activity you will use the second one.
          */
         dialog.show(getChildFragmentManager(),"NewContact");
+        dialog.setOnDialogCompleted(this);
     }
 
     /**
@@ -196,8 +197,7 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
             groupData.add(countryName);
             //2.查询登录用户的联系人列表
             sql = "select * from view_contact where belong_qq = ? and belong_country = ?";
-            Cursor cursor = db.rawQuery(sql, new String[]{QQMainActivity.loginedUser.getNum(),
-                            countryName});
+            Cursor cursor = db.rawQuery(sql, new String[]{QQMainActivity.loginedUser.getNum(), countryName});
             List<QQContactBean> list = new ArrayList<>();
             while(cursor.moveToNext()){
                 QQContactBean bean= new QQContactBean(

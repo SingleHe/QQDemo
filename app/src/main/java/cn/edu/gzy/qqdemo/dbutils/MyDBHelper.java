@@ -41,7 +41,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
         //QQ号
         String nums[][] = new String[][]{
                 {"1001","1002","1003","1004","1005","1006"},
-                {"2001","2002","2003"},
+                {"2001","2002","2003" +
+                        "" +
+                        ""},
                 {"3001","3002","3003"}
         };
         String names[][] = new String[][]{
@@ -87,18 +89,18 @@ public class MyDBHelper extends SQLiteOpenHelper {
         String sql1 = "insert into QQ_Contact(qq_num, belong_qq) values(?,?)";
         //设置1002的联系人
         for(int i = 0 ; i < nums.length; i++){
-            for(int j = 0 ; j < nums.length; j++){
+            for(int j = 0 ; j < nums[i].length; j++){
                 //将除了1002自己以外的人都设置成它的联系人
                 if(!"1002".equals(nums[i][j])){
-                  db.execSQL(sql, new Object[]{nums[i][j],"1002"});
+                  db.execSQL(sql1, new Object[]{nums[i][j],"1002"});
                 }
                 //设置1001的联系人  条件是：每一行偶数列的人才是联系人
                 if(!"1001".equals(nums[i][j]) && j % 2 == 0){
-                    db.execSQL(sql, new Object[]{nums[i][j], "1001"});
+                    db.execSQL(sql1, new Object[]{nums[i][j], "1001"});
                 }
                 //设置2001的联系人， 条件是：每一行中第二列之后的才是联系人
                 if(!"2001".equals(nums[i][j]) && j > 0){
-                    db.execSQL(sql, new Object[]{nums[i][j], "2001"});
+                    db.execSQL(sql1, new Object[]{nums[i][j], "2001"});
                 }
             }
         }
@@ -109,6 +111,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         //更新数据库  先把已有的数据表删除
         db.execSQL("drop table if exists QQ_Login");
         db.execSQL("drop table if exists QQ_Contact");
+        db.execSQL("drop view if exists view_contact");
         onCreate(db);
     }
 }

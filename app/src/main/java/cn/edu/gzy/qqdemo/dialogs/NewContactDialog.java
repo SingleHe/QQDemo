@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -37,14 +38,20 @@ public class NewContactDialog extends DialogFragment {
     public void setOnDialogCompleted(OnDialogCompleted onDialogCompleted){
         this.onDialogCompleted = onDialogCompleted;
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);//设置无标题的弹窗
         setCancelable(false);//弹窗不能关闭
+        Window window = getDialog().getWindow();//获取窗口
+        //去掉dialog默认的padding
+        window.getDecorView().setPadding(0,0,0,0);
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;//设置弹窗的宽度沾满整个屏幕
+        attributes.height = 850;//设置弹窗的高度
+        window.setAttributes(attributes);
         //1.加载弹窗视图
-        View view = inflater.inflate(R.layout.activity_dialog, container);
+        View view = inflater.inflate(R.layout.dialog_newcontact, container);
         //2. 读取控件
         spinContact = view.findViewById(R.id.dlg_spnContact);
         btnOK = view.findViewById(R.id.dlg_btnOK);
@@ -86,7 +93,7 @@ public class NewContactDialog extends DialogFragment {
         //2. 获取数据库对象
         SQLiteDatabase db = helper.getReadableDatabase();//查询数据
         //3. 构造SQL语句 : 由于新添加的联系人不能是已在联系人列表中的人，同时也不能是它自己
-        String sql = "select * from QQ_Contact where qq_num not in (" +
+        String sql = "select * from QQ_Login where qq_num not in (" +
                 "select qq_num from QQ_Contact where belong_qq = ?) and qq_num <> ?";
         Cursor cursor = db.rawQuery(sql,new String[]{QQMainActivity.loginedUser.getNum(),QQMainActivity.loginedUser.getNum()});
         //4. 遍历数据，将数据保存到列表中返回

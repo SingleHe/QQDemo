@@ -6,5 +6,5 @@ package cn.edu.gzy.qqdemo.dbutils;
 public class Db_Params {
     public static final String DB_NAME="QQ_DB";//数据库名称
     //public static final int DB_VER = 1;//数据库版本
-    public static final int DB_VER = 2;//数据库版本
+    public static final int DB_VER = 4;//数据库版本
 }

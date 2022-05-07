@@ -10,6 +10,7 @@
         android:text="@string/dialog_add_title"
         android:textSize="24sp"
         android:background="#2196F3"
+        android:layout_marginTop="5dp"
         android:padding="10dp"
         android:gravity="center"
         android:textColor="#fff"
