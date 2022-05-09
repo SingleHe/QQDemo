@@ -41,9 +41,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         //QQ号
         String nums[][] = new String[][]{
                 {"1001","1002","1003","1004","1005","1006"},
-                {"2001","2002","2003" +
-                        "" +
-                        ""},
+                {"2001","2002","2003"},
                 {"3001","3002","3003"}
         };
         String names[][] = new String[][]{
@@ -94,14 +92,14 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 if(!"1002".equals(nums[i][j])){
                   db.execSQL(sql1, new Object[]{nums[i][j],"1002"});
                 }
-                //设置1001的联系人  条件是：每一行偶数列的人才是联系人
+                /*//设置1001的联系人  条件是：每一行偶数列的人才是联系人
                 if(!"1001".equals(nums[i][j]) && j % 2 == 0){
                     db.execSQL(sql1, new Object[]{nums[i][j], "1001"});
                 }
                 //设置2001的联系人， 条件是：每一行中第二列之后的才是联系人
                 if(!"2001".equals(nums[i][j]) && j > 0){
                     db.execSQL(sql1, new Object[]{nums[i][j], "2001"});
-                }
+                }*/
             }
         }
     }

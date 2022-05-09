@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "QQDemo"
 include ':app'
 include ':chapter04_storage'
+include ':chapter04_content_resolver'
