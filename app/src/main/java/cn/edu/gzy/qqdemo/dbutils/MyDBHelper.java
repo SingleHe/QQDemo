@@ -19,7 +19,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         String sql = "CREATE TABLE QQ_Login(qq_num VARCHAR(20) PRIMARY KEY NOT NULL," +
                 "qq_name VARCHAR NOT NULL," +
                 "qq_pwd VARCHAR NOT NULL," +
-                "qq_img INT," +
+                "qq_imgurl VARCHAR," +
                 "qq_online VARCHAR," +
                 "qq_action VARCHAR ," +
                 "belong_country VARCHAR);";
@@ -32,8 +32,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 "QQ_Contact u LEFT JOIN QQ_Login v on u.qq_num = v.qq_num";
         db.execSQL(sql);//执行创建登录信息表
         db.execSQL(sql1);//执行创建联系人信息表
-        db.execSQL(sql2);//执行创建视图语句
         initData(db);
+        db.execSQL(sql2);//执行创建视图语句
     }
 
     private void initData(SQLiteDatabase db) {
@@ -51,7 +51,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         };//账号名
         //头像
         int icons[][] = {
-                {R.drawable.liubei,R.drawable.guanyu,R.drawable.zhangfei,R.drawable.huangzhong,R.drawable.weiyan},
+                {R.drawable.liubei,R.drawable.guanyu,R.drawable.zhangfei,R.drawable.zhaoyun,R.drawable.huangzhong,R.drawable.weiyan},
                 {R.drawable.caocao,R.drawable.xuchu,R.drawable.zhangliao},
                 {R.drawable.sunquan,R.drawable.lusu,R.drawable.lvmeng}
         };
@@ -70,14 +70,14 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 {"我负天下人","看我狗头","你看我头像牛逼不"},
                 {"老子一统三国","比上不足，比下有余","尚能饭否！"}
         };
-        String sql = "insert into QQ_Login(qq_num,qq_name,qq_pwd,qq_img,qq_online,qq_action,belong_country) values(?,?,?,?,?,?,?)";
+        String sql = "insert into QQ_Login(qq_num,qq_name,qq_pwd,qq_imgurl,qq_online,qq_action,belong_country) values(?,?,?,?,?,?,?)";
         for(int i= 0 ; i < countries.length; i++){
-            for(int j = 0 ; j < names.length; j++){
+            for(int j = 0 ; j < names[i].length; j++){
                 db.execSQL(sql,new Object[]{
                         nums[i][j],
                         names[i][j],
                         pwd[i][j],
-                        icons[i][j],
+                        Db_Params.PHOTO_URL+nums[i][j]+".jpg",
                         onLineMode[i][j],
                         qqAction[i][j],
                         countries[i]});

@@ -2,22 +2,22 @@ package cn.edu.gzy.qqdemo.beans;
 
 public class QQContactBean {
     private String name;//QQ 名
-    private int img;//QQ头像
     private String onLineMode;//登录方式
     private String newAction;//新状态
+    private String imgUrl;
     private String num;//QQ 号码
     private String belong_country;//所属国家
 
-    public QQContactBean(String name, int img, String onLineMode, String newAction) {
+    public QQContactBean(String name, String imgUrl, String onLineMode, String newAction) {
         this.name = name;
-        this.img = img;
+        this.imgUrl = imgUrl;
         this.onLineMode = onLineMode;
         this.newAction = newAction;
     }
 
-    public QQContactBean(String name, int img, String onLineMode, String newAction, String num, String belong_country) {
+    public QQContactBean(String name, String imgUrl, String onLineMode, String newAction, String num, String belong_country) {
         this.name = name;
-        this.img = img;
+        this.imgUrl = imgUrl;
         this.onLineMode = onLineMode;
         this.newAction = newAction;
         this.num = num;
@@ -32,12 +32,12 @@ public class QQContactBean {
         this.name = name;
     }
 
-    public int getImg() {
-        return img;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getOnLineMode() {

@@ -1,6 +1,9 @@
 package cn.edu.gzy.qqdemo.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +16,9 @@ import com.example.chapter02.R;
 import java.util.List;
 import java.util.Map;
 
+import cn.edu.gzy.qqdemo.QQMainActivity;
 import cn.edu.gzy.qqdemo.beans.QQContactBean;
+import cn.edu.gzy.qqdemo.dbutils.Db_Params;
 
 public class QQContactAdapter extends BaseExpandableListAdapter {
     private List<String> groupData;//类别信息
@@ -112,7 +117,10 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
             holder = (ChildHolder) convertView.getTag();
         }
         QQContactBean contactBean = (QQContactBean) getChild(groupPosition,childPosition);
-        holder.imgIcon.setImageResource(contactBean.getImg());
+        //holder.imgIcon.setImageResource(contactBean.getImg());
+        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+
+                QQMainActivity.loginedUser.getImgUrl());
+        holder.imgIcon.setImageBitmap(bitmap);
         holder.tvName.setText(contactBean.getName());
         holder.tvOnlineMode.setText(contactBean.getOnLineMode());
         holder.tvAction.setText(contactBean.getNewAction());

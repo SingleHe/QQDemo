@@ -58,7 +58,7 @@ public class QQLoginActivity extends AppCompatActivity {
             if(cursor.moveToNext()){
                 QQMainActivity.loginedUser = new QQContactBean(
                    cursor.getString(cursor.getColumnIndexOrThrow("qq_name")),
-                   cursor.getInt(cursor.getColumnIndexOrThrow("qq_img")),
+                   cursor.getString(cursor.getColumnIndexOrThrow("qq_imgurl")),
                    cursor.getString(cursor.getColumnIndexOrThrow("qq_online")),
                    cursor.getString(cursor.getColumnIndexOrThrow("qq_action")),
                    cursor.getString(cursor.getColumnIndexOrThrow("qq_num")),
