@@ -14,6 +14,7 @@ import java.util.Map;
 
 import cn.edu.gzy.qqdemo.adapters.QQContactAdapter;
 import cn.edu.gzy.qqdemo.beans.QQContactBean;
+import cn.edu.gzy.qqdemo.dbutils.Db_Params;
 
 public class QQContactActivity extends AppCompatActivity {
     private ExpandableListView epListView;
@@ -52,7 +53,7 @@ public class QQContactActivity extends AppCompatActivity {
             groupData.add(countries[i]);
             List<QQContactBean> list = new ArrayList<QQContactBean>();
             for (int j = 0; j < names[i].length; j++){
-                QQContactBean hero = new QQContactBean(names[i][j],icons[i][j],"[5G在线]","天天向上");
+                QQContactBean hero = new QQContactBean(names[i][j], Db_Params.PHOTO_URL+icons[i][j]+".jpg","[5G在线]","天天向上");
                 list.add(hero);
             }
             childData.put(countries[i],list);

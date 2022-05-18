@@ -1,9 +1,12 @@
 package cn.edu.gzy.qqdemo.adapters;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.chapter02.R;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -117,9 +121,17 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
             holder = (ChildHolder) convertView.getTag();
         }
         QQContactBean contactBean = (QQContactBean) getChild(groupPosition,childPosition);
+        Bitmap bitmap;
+        //如果点击的是本机联系人
+        if(groupData.get(groupPosition).equals("本机联系人")){
+            ContentResolver contentResolver = context.getContentResolver();
+            InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, Uri.parse(contactBean.getImgUrl()));
+            bitmap = BitmapFactory.decodeStream(input);
+        }else{
+            //否则获取
+            bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + contactBean.getImgUrl());
+        }
         //holder.imgIcon.setImageResource(contactBean.getImg());
-        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+
-                QQMainActivity.loginedUser.getImgUrl());
         holder.imgIcon.setImageBitmap(bitmap);
         holder.tvName.setText(contactBean.getName());
         holder.tvOnlineMode.setText(contactBean.getOnLineMode());

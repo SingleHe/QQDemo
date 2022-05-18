@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.edu.gzy.qqdemo.QQLoginActivity;
 import cn.edu.gzy.qqdemo.QQMainActivity;
 import cn.edu.gzy.qqdemo.adapters.QQContactAdapter;
 import cn.edu.gzy.qqdemo.beans.QQContactBean;
@@ -68,8 +69,8 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
         loginedImg = view.findViewById(R.id.imgLoginIcon);
         //在登录Activity中，已经将登录账号的数据查询出来设置在了QQMainActivity的静态内部成员loginedUser对象中。
         //loginedImg.setImageResource(QQMainActivity.loginedUser.getImg());
-        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageState()+
-                QQMainActivity.loginedUser.getImgUrl());
+        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+QQMainActivity.loginedUser.getImgUrl());
+        Log.d("QQContactFragment","获取的外部存储路径为："+Environment.getExternalStorageDirectory()+ QQMainActivity.loginedUser.getImgUrl());
         loginedImg.setImageBitmap(bitmap);
         addContactBtn = view.findViewById(R.id.tv_AddBtn);
         //点击添加联系人时，弹窗！
@@ -177,6 +178,7 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
      * 初始化数据,程序设定
      */
     private void initialData() {
+        getPhoneContacts();//初始化本机联系人数据
         for (int i = 0; i < countries.length; i++) {
             groupData.add(countries[i]);
             List<QQContactBean> list = new ArrayList<QQContactBean>();

@@ -3,10 +3,14 @@ package cn.edu.gzy.qqdemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -87,6 +91,10 @@ public class QQLoginActivity extends AppCompatActivity {
         QQCount.setText(settings.getString("qqCount",""));
         QQPassword.setText(settings.getString("qqPassword",""));
         chkRememberPwd.setChecked(settings.getBoolean("isRemembered",false));
+        //动态授权访问联系人
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},1000);
+        }
     }
 
     @Override
@@ -120,5 +128,19 @@ public class QQLoginActivity extends AppCompatActivity {
                         .show();
         }
         return true;
+    }
+
+    /**
+     * 当系统授无效时，系统会给出相应的提示信息。
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode != 1000){
+            Toast.makeText(this, "请授予读取联系人信息权限", Toast.LENGTH_SHORT).show();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
