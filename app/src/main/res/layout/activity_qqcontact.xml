@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/title_linear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="#3EA3F3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">

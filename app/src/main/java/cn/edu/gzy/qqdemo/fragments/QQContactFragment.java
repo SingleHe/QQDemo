@@ -80,8 +80,8 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
         epListView = view.findViewById(R.id.exlv_contact);
         childData = new HashMap<String, List<QQContactBean>>();
         groupData = new ArrayList<String>();
-        //initialData();//程序设定的联系人数据
-        getContacts();//访问数据库获取联系人数据
+        initialData();//程序设定的联系人数据
+        //getContacts();//访问数据库获取联系人数据
         //这里不要用this.getContenxt()
         adapter = new QQContactAdapter(groupData,childData,view.getContext());
         epListView.setAdapter(adapter);
