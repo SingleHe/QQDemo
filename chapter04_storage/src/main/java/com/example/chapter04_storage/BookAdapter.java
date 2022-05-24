@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.result_item_layout, parent, false);
         ViewHolder holder = new ViewHolder(v1);
+        ImageView bookImg = v1.findViewById(R.id.img_book);
+        bookImg.setOnClickListener(v->{
+            //todo  点击后图片放大操作
+        });
         return holder;
     }
 
