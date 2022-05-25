@@ -143,4 +143,5 @@ public class QQLoginActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+    
 }

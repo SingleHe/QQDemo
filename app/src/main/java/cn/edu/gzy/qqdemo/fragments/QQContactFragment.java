@@ -69,8 +69,11 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
         loginedImg = view.findViewById(R.id.imgLoginIcon);
         //在登录Activity中，已经将登录账号的数据查询出来设置在了QQMainActivity的静态内部成员loginedUser对象中。
         //loginedImg.setImageResource(QQMainActivity.loginedUser.getImg());
-        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+QQMainActivity.loginedUser.getImgUrl());
-        Log.d("QQContactFragment","获取的外部存储路径为："+Environment.getExternalStorageDirectory()+ QQMainActivity.loginedUser.getImgUrl());
+        //getExternalStorageDirectory()不推荐使用了
+        //Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+QQMainActivity.loginedUser.getImgUrl());
+        Bitmap bitmap = BitmapFactory.decodeFile(getContext().getExternalFilesDir(null)+"/"+QQMainActivity.loginedUser.getImgUrl());
+        //Log.d("QQContactFragment","获取的外部存储路径为："+Environment.getExternalStorageDirectory()+ QQMainActivity.loginedUser.getImgUrl());
+        Log.d("QQContactFragment","新的API获取的外部存储路径为："+getContext().getExternalFilesDir(null)+ QQMainActivity.loginedUser.getImgUrl());
         loginedImg.setImageBitmap(bitmap);
         addContactBtn = view.findViewById(R.id.tv_AddBtn);
         //点击添加联系人时，弹窗！
@@ -80,8 +83,8 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
         epListView = view.findViewById(R.id.exlv_contact);
         childData = new HashMap<String, List<QQContactBean>>();
         groupData = new ArrayList<String>();
-        initialData();//程序设定的联系人数据
-        //getContacts();//访问数据库获取联系人数据
+        //initialData();//程序设定的联系人数据
+        getContacts();//访问数据库获取联系人数据
         //这里不要用this.getContenxt()
         adapter = new QQContactAdapter(groupData,childData,view.getContext());
         epListView.setAdapter(adapter);
@@ -194,6 +197,7 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
      * 从数据库中查询出登录用户的联系人
      */
     private void getContacts(){
+        getPhoneContacts();
         //注意修改数据库版本，改为比原先版本更大的值
         MyDBHelper helper = new MyDBHelper(getContext(), Db_Params.DB_NAME, null, Db_Params.DB_VER);
         /*（1）getWritableDatabase()方法以读写方式打开数据库。
@@ -292,8 +296,18 @@ public class QQContactFragment extends Fragment implements OnDialogCompleted {
             //取得contact_id的URI
             Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,
                     Long.parseLong(contactId));
-            QQContactBean qqContactBean = new QQContactBean(strPhoneNumber, name, uri.toString(), "手机", strEmail, "本机联系人");
-            list.add(qqContactBean);
+            //QQContactBean qqContactBean = new QQContactBean(strPhoneNumber, name, uri.toString(), "手机", strEmail, "本机联系人");
+            //获取通讯录头像
+            Uri photoUri = Uri.withAppendedPath(uri, ContactsContract.Contacts.Photo.DISPLAY_PHOTO);
+            Log.d("QQContactFragment","获取的通讯录中联系人头像为："+photoUri.toString());
+            QQContactBean localContact = new QQContactBean();
+            localContact.setName(name);
+            localContact.setImgUrl(uri.toString());
+            localContact.setOnLineMode(strPhoneNumber);
+            localContact.setNewAction(strEmail);
+            localContact.setNum(strPhoneNumber);
+            localContact.setBelong_country("本机联系人");
+            list.add(localContact);
         }
         childData.put("本机联系人", list);
         cursor.close();

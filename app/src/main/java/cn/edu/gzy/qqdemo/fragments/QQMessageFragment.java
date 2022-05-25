@@ -1,5 +1,7 @@
 package cn.edu.gzy.qqdemo.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import cn.edu.gzy.qqdemo.QQMainActivity;
 import cn.edu.gzy.qqdemo.adapters.QQMessageAdapter;
 import cn.edu.gzy.qqdemo.beans.QQMessageBean;
 
@@ -35,6 +39,9 @@ public class QQMessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_qqmessage, container, false);
+        ImageView loginedImg = view.findViewById(R.id.imgLoginIcon);
+        Bitmap bitmap = BitmapFactory.decodeFile(getContext().getExternalFilesDir(null)+"/"+ QQMainActivity.loginedUser.getImgUrl());
+        loginedImg.setImageBitmap(bitmap);
         ListView lvMsg = view.findViewById(R.id.listview_qqmsg);
         QQMessageAdapter adapter = new  QQMessageAdapter(getMessageList(),view.getContext());
         lvMsg.setAdapter(adapter);

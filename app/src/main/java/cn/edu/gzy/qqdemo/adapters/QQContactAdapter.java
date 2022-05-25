@@ -2,6 +2,7 @@ package cn.edu.gzy.qqdemo.adapters;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.chapter02.R;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +34,8 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
 
     public QQContactAdapter() {
     }
-    public QQContactAdapter(List<String> groupData, Map<String, List<QQContactBean>> childData, Context context){
+
+    public QQContactAdapter(List<String> groupData, Map<String, List<QQContactBean>> childData, Context context) {
         this.groupData = groupData;
         this.childData = childData;
         this.context = context;
@@ -44,6 +48,7 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
 
     /**
      * 获取某一类别下联系人的个数
+     *
      * @param groupPosition
      * @return
      */
@@ -54,6 +59,7 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
 
     /**
      * 获取某一类别下联系人的具体数据，返回的应该是一个List<QQContactBean>对象
+     *
      * @param groupPosition
      * @return
      */
@@ -64,6 +70,7 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
 
     /**
      * 根据所点击的分类，以及分类下的点击位置，找到具体的某一个联系人
+     *
      * @param groupPosition
      * @param childPosition
      * @return
@@ -91,17 +98,17 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         GroupHolder holder;
-        if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_contact_group,parent,false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_contact_group, parent, false);
             holder = new GroupHolder();
             holder.tvGroupTitle = convertView.findViewById(R.id.tv_grouptitle);
             holder.tvGroupCount = convertView.findViewById(R.id.tv_groupcount);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (GroupHolder) convertView.getTag();
         }
         holder.tvGroupTitle.setText(groupData.get(groupPosition));
-        holder.tvGroupCount.setText(getChildrenCount(groupPosition)+"");
+        holder.tvGroupCount.setText(getChildrenCount(groupPosition) + "");
         //holder.tvGroupCount.setText(childData.get(groupData.get(groupPosition)).size()+"");
         return convertView;
     }
@@ -109,27 +116,32 @@ public class QQContactAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildHolder holder;
-        if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_contact_child,parent,false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_contact_child, parent, false);
             holder = new ChildHolder();
             holder.imgIcon = convertView.findViewById(R.id.imgIcon);
             holder.tvName = convertView.findViewById(R.id.tvName);
             holder.tvOnlineMode = convertView.findViewById(R.id.tv_OnlineMode);
-            holder.tvAction  = convertView.findViewById(R.id.tv_Action);
+            holder.tvAction = convertView.findViewById(R.id.tv_Action);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ChildHolder) convertView.getTag();
         }
-        QQContactBean contactBean = (QQContactBean) getChild(groupPosition,childPosition);
+        QQContactBean contactBean = (QQContactBean) getChild(groupPosition, childPosition);
         Bitmap bitmap;
         //如果点击的是本机联系人
-        if(groupData.get(groupPosition).equals("本机联系人")){
+        if (groupData.get(groupPosition).equals("本机联系人")) {
             ContentResolver contentResolver = context.getContentResolver();
+            AssetFileDescriptor fd;
+                /*fd = contentResolver.openAssetFileDescriptor(Uri.parse(contactBean.getImgUrl()), "r");
+                InputStream input = fd.createInputStream();
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inSampleSize = 1;*/
             InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, Uri.parse(contactBean.getImgUrl()));
             bitmap = BitmapFactory.decodeStream(input);
-        }else{
+        } else {
             //否则获取
-            bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + contactBean.getImgUrl());
+            bitmap = BitmapFactory.decodeFile(context.getExternalFilesDir(null) + "/" + contactBean.getImgUrl());
         }
         //holder.imgIcon.setImageResource(contactBean.getImg());
         holder.imgIcon.setImageBitmap(bitmap);

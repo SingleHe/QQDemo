@@ -7,7 +7,9 @@ public class QQContactBean {
     private String imgUrl;
     private String num;//QQ 号码
     private String belong_country;//所属国家
+    public QQContactBean(){
 
+    }
     public QQContactBean(String name, String imgUrl, String onLineMode, String newAction) {
         this.name = name;
         this.imgUrl = imgUrl;

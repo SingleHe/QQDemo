@@ -77,7 +77,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                         nums[i][j],
                         names[i][j],
                         pwd[i][j],
-                        Db_Params.PHOTO_URL+nums[i][j]+".jpg",
+                        nums[i][j]+".jpg",
                         onLineMode[i][j],
                         qqAction[i][j],
                         countries[i]});
