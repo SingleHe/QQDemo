@@ -5,14 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_chatroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#55D9F3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_name">
+        <TextView
+            android:id="@+id/tv_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录聊天室"
+            android:textColor="#f3f4f5"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="用户名:"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_chatroom"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="150dp"/>
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_name"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:inputType="text"
+        android:hint="请输入用户名"
+        android:layout_marginStart="5dp"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/tv_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IP地址:"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:id="@+id/et_ip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_ip"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_ip"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:inputType="text"
+        android:hint="请输入服务端IP"
+        android:layout_marginStart="5dp"
+        android:textSize="24sp"/>
+    <TextView
+        android:id="@+id/tv_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="端口号:"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_ip"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:id="@+id/et_port"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_ip"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_port"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:inputType="text"
+        android:hint="请输入服务器端口"
+        android:layout_marginStart="5dp"
+        android:textSize="24sp"/>
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_port"
+        android:layout_marginTop="50dp"
+        android:text="连接服务端"
+        android:textSize="24sp"/>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

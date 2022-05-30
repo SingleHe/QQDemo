@@ -37,7 +37,7 @@ public class ChatRoom extends AppCompatActivity {
     private Button send;
     private Button back;
     private RecyclerView msgRecyclerView;
-    private String ip = "192.168.0.104";
+    private String ip = "172.16.68.176";
     private String port = "6666";
     private TextView myName;
     private String recMsg;
@@ -113,7 +113,7 @@ public class ChatRoom extends AppCompatActivity {
         new Thread(()->{
             try {
                 if((socketSend = new Socket(ip, Integer.parseInt(port))) == null){
-                    Log.d("CoupleHe","发送了一条消息1");
+                    Log.d("CoupleHe","未建立连接！");
                 }else{
                     isRunning = true;
                     Log.d("CoupleHe","发送了一条消息2");
@@ -180,7 +180,7 @@ public class ChatRoom extends AppCompatActivity {
         public void run() {
             while(isRunning){
                 String content = inputText.getText().toString();
-                Log.d("CoupleHe","发送了一条消息！");
+                //Log.d("CoupleHe","发送了一条消息！");
                 if(!"".equals(content) && isSend){
                     String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     StringBuilder sb = new StringBuilder();

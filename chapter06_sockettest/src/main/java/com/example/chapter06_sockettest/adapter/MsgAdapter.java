@@ -3,6 +3,8 @@ package com.example.chapter06_sockettest.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,10 +32,16 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Msg msg = msgList.get(position);
+        //左侧是接收到的消息
         if(msg.getType() == Msg.TYPE_RECEIVED){
-            //todo
+            holder.lefLayout.setVisibility(View.VISIBLE);
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftMsg.setText(msg.getContent());
+        //右侧是发送的消息
         }else if(msg.getType() == Msg.TYPE_SENT){
-            //todo
+            holder.lefLayout.setVisibility(View.GONE);
+            holder.rightLayout.setVisibility(View.VISIBLE);
+            holder.rightMsg.setText(msg.getContent());
         }
     }
 
@@ -43,9 +51,16 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //todo
+        LinearLayout lefLayout;
+        LinearLayout rightLayout;
+        TextView leftMsg;
+        TextView rightMsg;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            lefLayout = itemView.findViewById(R.id.left_layout);
+            rightLayout = itemView.findViewById(R.id.right_layout);
+            leftMsg = itemView.findViewById(R.id.left_msg);
+            rightMsg = itemView.findViewById(R.id.right_msg);
         }
     }
 }
